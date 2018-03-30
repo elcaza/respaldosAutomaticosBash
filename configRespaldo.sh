@@ -3,6 +3,14 @@
 # Config para Respaldo automatizado V1
 # @author henkerLove
 
+# ****************************CRON **************************
+# Para automatizar mediante cron se puede ocupar el comando 
+# sudo nano /etc/crontab
+# luego añadir las siguientes líneas
+# <min> <hora> <diaDelMes> <mes> <diaDeLaSemana> <user> </rutaDelScript/script.sh>
+# Ejemplo: 00 21 * * * user /ruta/configRespaldo.sh
+# ***********************************************************
+
 CARPETA_RESPALDOS="/home/`whoami`/respaldos" #contendra los respaldos realizados
 RUTA_SCRIPT="/ubicacion/respaldo.sh" #ubicacion del script
 CARPETA_A_RESPALDAR="/carpeta/" #carpeta que sera respaldada
@@ -20,7 +28,7 @@ cd $CARPETA_RESPALDOS
 if [ -e $RUTA_SCRIPT ] && [ ! -x $RUTA_SCRIPT ]; then
 	echo "Existe el archivo"
 	chmod +x $RUTA_SCRIPT
-else 
+elif [ ! -e $RUTA_SCRIPT ]; then 
 	echo "No se encuentra el script" 
 	echo "No se encuentra el script" >> logError.txt
 fi
